@@ -110,7 +110,9 @@ def get_running_archive_jobs(arch_cfg):
                 args = proc.cmdline()
                 for arg in args:
                     if arg.startswith(dest):
+                        print(f'RSYNC JOB RUNNING! {proc.pid}')
                         jobs.append(proc.pid)
+
     return jobs
 
 
@@ -166,4 +168,5 @@ def archive(dir_cfg, all_jobs):
     cmd = ('rsync %s --remove-source-files -P %s %s' %
             (throttle_arg, chosen_plot, rsync_dest(dir_cfg.archive, archdir)))
 
+    print(f"CMD is {cmd}")
     return (True, cmd)
